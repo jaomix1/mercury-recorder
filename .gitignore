@@ -1,0 +1,11 @@
+# Compilación
+.build/
+build/
+.swiftpm/
+DerivedData/
+
+# Sistema y editor
+.DS_Store
+.vscode/
+*.xcuserstate
+xcuserdata/
