@@ -28,7 +28,7 @@ final class Recorder: NSObject, SCStreamOutput, SCStreamDelegate {
         }
     }
 
-    private let queue = DispatchQueue(label: "grabadora.captura")
+    private let queue = DispatchQueue(label: "mercury-recorder.captura")
     private var stream: SCStream?
     private var micWriter: AudioTrackWriter?
     private var systemWriter: AudioTrackWriter?
@@ -88,7 +88,7 @@ final class Recorder: NSObject, SCStreamOutput, SCStreamDelegate {
                 micLive = try await LiveTranscriber(speaker: Transcription.speakerMe, locale: liveLocale)
                 systemLive = try await LiveTranscriber(speaker: Transcription.speakerOthers, locale: liveLocale)
             } catch {
-                NSLog("Grabadora: sin transcripción en vivo: \(error.localizedDescription)")
+                NSLog("mercury-recorder: sin transcripción en vivo: \(error.localizedDescription)")
                 micLive = nil
                 systemLive = nil
             }
@@ -121,7 +121,7 @@ final class Recorder: NSObject, SCStreamOutput, SCStreamDelegate {
                 do {
                     try self?.micWriter?.append(buffer, at: pts)
                 } catch {
-                    NSLog("Grabadora: error al escribir el micrófono: \(error.localizedDescription)")
+                    NSLog("mercury-recorder: error al escribir el micrófono: \(error.localizedDescription)")
                 }
             }
         } catch {
@@ -167,7 +167,7 @@ final class Recorder: NSObject, SCStreamOutput, SCStreamDelegate {
                                     info: info, folder: folder, inProgress: true)
             DispatchQueue.main.async { self.onLiveUpdate?() }
         } catch {
-            NSLog("Grabadora: no se pudo escribir la transcripción en vivo: \(error.localizedDescription)")
+            NSLog("mercury-recorder: no se pudo escribir la transcripción en vivo: \(error.localizedDescription)")
         }
     }
 
@@ -277,7 +277,7 @@ final class Recorder: NSObject, SCStreamOutput, SCStreamDelegate {
             default: break
             }
         } catch {
-            NSLog("Grabadora: error al escribir audio: \(error.localizedDescription)")
+            NSLog("mercury-recorder: error al escribir audio: \(error.localizedDescription)")
         }
     }
 

@@ -96,7 +96,7 @@ final class LiveTranscriber {
         if finished {
             _ = try? await resultsTask?.value
         } else {
-            NSLog("Grabadora: el motor de voz no terminó a tiempo; se guarda lo confirmado")
+            NSLog("mercury-recorder: el motor de voz no terminó a tiempo; se guarda lo confirmado")
             await analyzer.cancelAndFinishNow()
             resultsTask?.cancel()
         }

@@ -28,7 +28,7 @@ final class HotKeys {
         var ref: EventHotKeyRef?
         let status = RegisterEventHotKey(keyCode, modifiers, hotKeyID, GetApplicationEventTarget(), 0, &ref)
         guard status == noErr, let ref else {
-            NSLog("Grabadora: no se pudo registrar el atajo \(id) (código \(status))")
+            NSLog("mercury-recorder: no se pudo registrar el atajo \(id) (código \(status))")
             return
         }
         refs.append(ref)

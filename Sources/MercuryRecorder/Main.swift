@@ -29,7 +29,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     }
 }
 
-struct GrabadoraApp: App {
+struct MercuryRecorderApp: App {
     @NSApplicationDelegateAdaptor(AppDelegate.self) private var appDelegate
     @StateObject private var model = AppModel()
 
@@ -54,13 +54,13 @@ enum Main {
     static func main() {
         let args = CommandLine.arguments
         // Modo de línea de comandos para probar la transcripción sin la interfaz:
-        //   Grabadora --transcribir <archivo de audio>
-        //   Grabadora --transcribir-reunion <carpeta>
-        // Grabadora --autoprueba: verifica la lógica pura (eco, búsqueda, fragmentos).
+        //   mercury-recorder --transcribir <archivo de audio>
+        //   mercury-recorder --transcribir-reunion <carpeta>
+        // mercury-recorder --autoprueba: verifica la lógica pura (eco, búsqueda, fragmentos).
         if args.count == 2, args[1] == "--autoprueba" {
             exit(SelfTest.run() ? 0 : 1)
         }
-        // Grabadora --recuperar <carpeta>: rearma una reunión interrumpida desde sus respaldos.
+        // mercury-recorder --recuperar <carpeta>: rearma una reunión interrumpida desde sus respaldos.
         if args.count == 3, args[1] == "--recuperar" {
             do {
                 let ok = try MeetingRecovery.recover(URL(fileURLWithPath: args[2], isDirectory: true))
@@ -71,7 +71,7 @@ enum Main {
                 exit(1)
             }
         }
-        // Grabadora --pdf <carpeta> <salida.pdf>: exporta el acta.
+        // mercury-recorder --pdf <carpeta> <salida.pdf>: exporta el acta.
         if args.count == 4, args[1] == "--pdf" {
             let folder = URL(fileURLWithPath: args[2], isDirectory: true)
             let meeting = Meeting.loadAll().first { $0.folder.standardizedFileURL == folder.standardizedFileURL }
@@ -87,7 +87,7 @@ enum Main {
                 exit(1)
             }
         }
-        // Grabadora --probar-microfono <carpeta>: graba 4 s del micrófono con el mismo
+        // mercury-recorder --probar-microfono <carpeta>: graba 4 s del micrófono con el mismo
         // camino que la app y muestra formato, bloques recibidos y si se escribió audio.
         if args.count == 3, args[1] == "--probar-microfono" {
             let folder = URL(fileURLWithPath: args[2], isDirectory: true)
@@ -119,7 +119,7 @@ enum Main {
             }
             dispatchMain()
         }
-        // Grabadora --probar-cancelar <carpeta>: empieza un resumen con Claude y lo cancela a los 2 s.
+        // mercury-recorder --probar-cancelar <carpeta>: empieza un resumen con Claude y lo cancela a los 2 s.
         if args.count == 3, args[1] == "--probar-cancelar" {
             let folder = URL(fileURLWithPath: args[2], isDirectory: true)
             let task = Task {
@@ -137,7 +137,7 @@ enum Main {
             }
             dispatchMain()
         }
-        // Grabadora --probar-cierre: cierra un transcriptor en vivo que no recibió audio
+        // mercury-recorder --probar-cierre: cierra un transcriptor en vivo que no recibió audio
         // (antes se quedaba esperando para siempre).
         if args.count == 2, args[1] == "--probar-cierre" {
             Task {
@@ -155,13 +155,13 @@ enum Main {
             }
             dispatchMain()
         }
-        // Grabadora --microfono: apps de reuniones que están usando el micrófono ahora.
+        // mercury-recorder --microfono: apps de reuniones que están usando el micrófono ahora.
         if args.count == 2, args[1] == "--microfono" {
             let apps = MeetingDetector.appsUsingMicrophone()
             print(apps.isEmpty ? "Ninguna app de reuniones está usando el micrófono." : apps.joined(separator: ", "))
             exit(0)
         }
-        // Grabadora --resumir <carpeta>: genera resumen.md con Apple Intelligence.
+        // mercury-recorder --resumir <carpeta>: genera resumen.md con Apple Intelligence.
         if args.count == 3, args[1] == "--resumir" {
             Task {
                 do {
@@ -175,7 +175,7 @@ enum Main {
             }
             dispatchMain()
         }
-        // Grabadora --links <carpeta>: muestra a dónde apunta cada link de la transcripción.
+        // mercury-recorder --links <carpeta>: muestra a dónde apunta cada link de la transcripción.
         if args.count == 3, args[1] == "--links" {
             let folder = URL(fileURLWithPath: args[2], isDirectory: true)
             let markdown = (try? String(contentsOf: folder.appending(path: MeetingFiles.transcript), encoding: .utf8)) ?? ""
@@ -187,7 +187,7 @@ enum Main {
             }
             exit(0)
         }
-        // Grabadora --probar-vivo <archivo>: alimenta el transcriptor en vivo en bloques de
+        // mercury-recorder --probar-vivo <archivo>: alimenta el transcriptor en vivo en bloques de
         // 100 ms (como la grabación) y muestra lo confirmado cada 20 s de audio.
         if args.count == 3, args[1] == "--probar-vivo" {
             Task {
@@ -241,6 +241,6 @@ enum Main {
             }
             dispatchMain()
         }
-        GrabadoraApp.main()
+        MercuryRecorderApp.main()
     }
 }

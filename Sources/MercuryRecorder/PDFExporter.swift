@@ -46,7 +46,7 @@ enum PDFExporter {
         operation.showsPrintPanel = false
         operation.showsProgressPanel = false
         guard operation.run() else {
-            throw NSError(domain: "Grabadora", code: 1,
+            throw NSError(domain: "mercury-recorder", code: 1,
                           userInfo: [NSLocalizedDescriptionKey: "No se pudo crear el PDF."])
         }
     }

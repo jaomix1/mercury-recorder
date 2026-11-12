@@ -98,12 +98,18 @@ final class AppModel: ObservableObject {
         // La primera vez se activa sola (se pidió que la app arranque con el sistema).
         if !defaults.bool(forKey: "inicioConfigurado") {
             defaults.set(true, forKey: "inicioConfigurado")
+            defaults.set(true, forKey: "abrirAlIniciar")
             setLaunchAtLogin(true)
+        } else if defaults.object(forKey: "abrirAlIniciar") as? Bool ?? true {
+            // Se vuelve a registrar en cada arranque: si la app cambió de nombre o de
+            // carpeta, el inicio automático queda apuntando a la ubicación actual.
+            try? SMAppService.mainApp.register()
         }
         syncLoginItem()
     }
 
     private func setLaunchAtLogin(_ enabled: Bool) {
+        UserDefaults.standard.set(enabled, forKey: "abrirAlIniciar")
         do {
             if enabled {
                 try SMAppService.mainApp.register()

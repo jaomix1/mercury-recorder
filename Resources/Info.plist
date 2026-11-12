@@ -3,13 +3,17 @@
 <plist version="1.0">
 <dict>
     <key>CFBundleName</key>
-    <string>Grabadora</string>
+    <string>mercury-recorder</string>
     <key>CFBundleDisplayName</key>
-    <string>Grabadora de Reuniones</string>
+    <string>mercury-recorder</string>
     <key>CFBundleIdentifier</key>
     <string>local.grabadora.reuniones</string>
     <key>CFBundleExecutable</key>
-    <string>Grabadora</string>
+    <string>mercury-recorder</string>
+    <key>CFBundleIconFile</key>
+    <string>AppIcon</string>
+    <key>CFBundleIconName</key>
+    <string>AppIcon</string>
     <key>CFBundlePackageType</key>
     <string>APPL</string>
     <key>CFBundleShortVersionString</key>
@@ -23,10 +27,10 @@
     <key>LSUIElement</key>
     <true/>
     <key>NSMicrophoneUsageDescription</key>
-    <string>La Grabadora usa el micrófono para grabar tu voz durante las reuniones.</string>
+    <string>mercury-recorder usa el micrófono para grabar tu voz durante las reuniones.</string>
     <key>NSScreenCaptureUsageDescription</key>
-    <string>La Grabadora captura el audio del sistema para grabar a los demás participantes de la reunión.</string>
+    <string>mercury-recorder captura el audio del sistema para grabar a los demás participantes de la reunión.</string>
     <key>NSSpeechRecognitionUsageDescription</key>
-    <string>La Grabadora transcribe las reuniones en tu Mac, sin enviar el audio a internet.</string>
+    <string>mercury-recorder transcribe las reuniones en tu Mac, sin enviar el audio a internet.</string>
 </dict>
 </plist>

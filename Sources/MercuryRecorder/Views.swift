@@ -118,7 +118,7 @@ struct MenuContent: View {
                 .help("Muestra una notificación cuando Zoom, Teams, Meet, Discord u otra app empieza a usar el micrófono")
             if model.detectMeetings, model.notificationsAllowed == false {
                 VStack(alignment: .leading, spacing: 4) {
-                    Label("macOS no está dejando que la Grabadora muestre notificaciones. Igual verás el aviso aquí y el ícono cambiará.",
+                    Label("macOS no está dejando que mercury-recorder muestre notificaciones. Igual verás el aviso aquí y el ícono cambiará.",
                           systemImage: "bell.slash")
                         .font(.caption)
                         .foregroundStyle(.orange)
@@ -230,7 +230,7 @@ struct AudioLevels: View {
             VStack(alignment: .leading, spacing: 6) {
                 row("Micrófono", icon: "mic.fill", level: model.micLevel, warning: model.micSilent || model.micNotReceiving,
                     warningText: model.micNotReceiving
-                        ? "No está llegando audio del micrófono. Revisa Ajustes del Sistema › Privacidad y seguridad › Micrófono (Grabadora activada) y Sonido › Entrada."
+                        ? "No está llegando audio del micrófono. Revisa Ajustes del Sistema › Privacidad y seguridad › Micrófono (mercury-recorder activada) y Sonido › Entrada."
                         : "No se oye el micrófono. Revisa que esté conectado y que no esté silenciado.")
                 row("Sistema", icon: "speaker.wave.2.fill", level: model.systemLevel, warning: model.systemSilent,
                     warningText: "No suena nada en el Mac. Normal si nadie más ha hablado aún.")
@@ -381,7 +381,7 @@ struct MeetingsWindow: View {
                 .help("Atajo: \(HotKeys.recordLabel)")
             }
         }
-        .alert("Grabadora", isPresented: Binding(
+        .alert("mercury-recorder", isPresented: Binding(
             get: { model.errorMessage != nil },
             set: { if !$0 { model.errorMessage = nil } }
         )) {

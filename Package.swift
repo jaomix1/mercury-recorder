@@ -2,12 +2,12 @@
 import PackageDescription
 
 let package = Package(
-    name: "Grabadora",
+    name: "mercury-recorder",
     platforms: [.macOS(.v26)],
     targets: [
         .executableTarget(
-            name: "Grabadora",
-            path: "Sources/Grabadora",
+            name: "mercury-recorder",
+            path: "Sources/MercuryRecorder",
             swiftSettings: [.swiftLanguageMode(.v5)]
         )
     ]

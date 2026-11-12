@@ -33,7 +33,7 @@ final class MicrophoneCapture {
             do {
                 try self.startEngine()
             } catch {
-                NSLog("Grabadora: no se pudo reanudar el micrófono: \(error.localizedDescription)")
+                NSLog("mercury-recorder: no se pudo reanudar el micrófono: \(error.localizedDescription)")
             }
         }
     }

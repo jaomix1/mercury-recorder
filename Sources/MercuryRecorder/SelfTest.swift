@@ -1,6 +1,6 @@
 import Foundation
 
-/// Pruebas de la lógica pura, ejecutables con `Grabadora --autoprueba`
+/// Pruebas de la lógica pura, ejecutables con `mercury-recorder --autoprueba`
 /// (las Command Line Tools no traen XCTest).
 enum SelfTest {
     private static var failures = 0

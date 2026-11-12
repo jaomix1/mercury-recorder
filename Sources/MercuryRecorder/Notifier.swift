@@ -22,7 +22,7 @@ final class Notifier: NSObject, UNUserNotificationCenterDelegate {
     /// Pide el permiso (la primera vez macOS muestra el diálogo) y devuelve si está concedido.
     func requestAuthorization(_ completion: @escaping (Bool) -> Void) {
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { granted, error in
-            if let error { NSLog("Grabadora: permiso de notificaciones: \(error.localizedDescription)") }
+            if let error { NSLog("mercury-recorder: permiso de notificaciones: \(error.localizedDescription)") }
             DispatchQueue.main.async { completion(granted) }
         }
     }
@@ -39,7 +39,7 @@ final class Notifier: NSObject, UNUserNotificationCenterDelegate {
         let center = UNUserNotificationCenter.current()
         center.requestAuthorization(options: [.alert, .sound]) { granted, _ in
             guard granted else {
-                NSLog("Grabadora: reunión detectada en \(app), pero macOS no permite notificaciones")
+                NSLog("mercury-recorder: reunión detectada en \(app), pero macOS no permite notificaciones")
                 return
             }
             let content = UNMutableNotificationContent()

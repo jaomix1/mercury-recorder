@@ -1,4 +1,4 @@
-# Grabadora de Reuniones
+# mercury-recorder
 
 App de barra de menú para macOS 26+ que graba tus reuniones (micrófono + audio del sistema) y las transcribe en español **en el Mac**, sin enviar audio a internet.
 
@@ -6,10 +6,12 @@ App de barra de menú para macOS 26+ que graba tus reuniones (micrófono + audio
 
 ```bash
 ./scripts/build-app.sh
-open build/Grabadora.app
+open build/mercury-recorder.app
 ```
 
 Solo necesita las Command Line Tools (no Xcode).
+
+El ícono está en `Resources/AppIcon.icns`. Si cambias el diseño en `scripts/make-icon.swift`, regenéralo con `./scripts/make-icon.sh`.
 
 ## Uso
 
@@ -51,9 +53,9 @@ En `~/Documents/Reuniones/<fecha>/`:
 
 - **Eco sin audífonos:** las frases de `Yo` que repiten lo que sonó por el sistema en ese momento se quitan de la transcripción (el audio no cambia). Con audífonos el resultado sigue siendo mejor.
 - **Resumen:** necesita Apple Intelligence activado y su modelo descargado. Si no está listo, el botón **Resumir** explica por qué.
-- **Firma ad-hoc:** cada vez que recompilas, macOS puede volver a pedir los permisos.
+- **Firma:** el script firma con el certificado autofirmado `mercury-recorder` (Acceso a Llaveros) si existe, así los permisos se conservan al recompilar. Sin ese certificado firma ad-hoc y macOS puede volver a pedir los permisos. Otro certificado: `GRABADORA_FIRMA="Nombre" ./scripts/build-app.sh`. Solo sirve en este Mac; para compartir la app hace falta un certificado Developer ID de Apple y notarizarla.
 - **Atajos:** ⌃⌥R grabar/detener, ⌃⌥S capturar. Si otra app ya los usa, no se registran.
-- **Pruebas sin interfaz** (`build/Grabadora.app/Contents/MacOS/Grabadora …`):
+- **Pruebas sin interfaz** (`build/mercury-recorder.app/Contents/MacOS/mercury-recorder …`):
   - `--autoprueba`: lógica de eco, búsqueda y resumen.
   - `--transcribir <archivo>` · `--transcribir-reunion <carpeta>` · `--probar-vivo <archivo>`
   - `--recuperar <carpeta>` · `--pdf <carpeta> <salida.pdf>` · `--resumir <carpeta>` · `--microfono` · `--links <carpeta>`

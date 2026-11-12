@@ -231,7 +231,7 @@ enum Summarizer {
             """
         let transcript = lines.joined(separator: "\n")
 
-        let workDir = FileManager.default.temporaryDirectory.appending(path: "grabadora-resumen-\(UUID().uuidString)")
+        let workDir = FileManager.default.temporaryDirectory.appending(path: "mercury-recorder-resumen-\(UUID().uuidString)")
         try FileManager.default.createDirectory(at: workDir, withIntermediateDirectories: true)
         defer { try? FileManager.default.removeItem(at: workDir) }
 

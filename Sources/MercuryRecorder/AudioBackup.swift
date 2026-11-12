@@ -73,7 +73,7 @@ final class BackupWriter {
         do {
             try file.write(from: converted)
         } catch {
-            NSLog("Grabadora: no se pudo escribir el respaldo: \(error.localizedDescription)")
+            NSLog("mercury-recorder: no se pudo escribir el respaldo: \(error.localizedDescription)")
         }
     }
 
